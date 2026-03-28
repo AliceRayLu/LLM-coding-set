@@ -1,32 +1,140 @@
 # LLM-coding-set
 
-All the AI-Infra-related codings and explanations.
+All the AI-Infra-related codings and explanations from bottom up to the top.
 
 **[Contents]**
 
 - [ ] 1 Operators
-    - [x] 1.1 GEMM
+    - [ ] 1.1 GEMM
+        - [ ] Naive GEMM (CPU)
+        - [ ] Tiled GEMM (shared memory)
+        - [ ] WMMA/Tensor Core GEMM
+        - [ ] Grouped GEMM / Batched GEMM
+        - [ ] Epilogue fusion (bias + activation)
     - [ ] 1.2 Norm
+        - [ ] LayerNorm
+        - [ ] RMSNorm
+        - [ ] Fused Add + Norm
     - [ ] 1.3 activation
+        - [ ] GeLU
+        - [ ] SwiGLU / GeGLU
+        - [ ] Fused bias + activation
     - [ ] 1.4 softmax
+        - [ ] safe softmax
+        - [ ] Online softmax
+    - [ ] 1.5 Reduction & Scan
+        - [ ] Block reduction
+        - [ ] Prefix sum (scan)
+    - [ ] 1.6 Elementwise/Fused Operators
+        - [ ] Broadcast patterns
+        - [ ] Kernel fusion
 - [ ] 2 Attention
     - [ ] 2.1 FlashAttention
+        - [ ] FlashAttention v1
+        - [ ] FlashAttention v2
+        - [ ] Variable-length sequences
     - [ ] 2.2 Compact Attention
+        - [ ] MQA
+        - [ ] GQA
+        - [ ] MLA
     - [ ] 2.3 Sparse Attention
+        - [ ] Block sparse attention
+        - [ ] Sliding window attention
+        - [ ] DSA
     - [ ] 2.4 Linear Attention
+        - [ ] Kernelized attention
+        - [ ] State-space alternatives
+    - [ ] 2.5 Cross Attention
 - [ ] 3 Transformer Architecture
     - [ ] 3.1 Position Encoding
+        - [ ] Sinusoidal
+        - [ ] RoPE
+        - [ ] ALiBi
     - [ ] 3.2 KV cache
-    - [ ] MoE
+        - [ ] Cache layout and paging
+        - [ ] Prefix cache reuse
+        - [ ] Cache quantization
+    - [ ] 3.3 MoE
+        - [ ] Top-k routing
+        - [ ] Load balancing loss
+        - [ ] Expert parallelism
+    - [ ] 3.4 FFN variants
+        - [ ] Dense FFN
+        - [ ] SwiGLU FFN
+    - [ ] 3.5 Long-context architecture tricks
+        - [ ] Sliding window + global tokens
+        - [ ] Chunked attention
 - [ ] 4 Train
     - [ ] DP
+        - [ ] Gradient accumulation
+        - [ ] Overlap comm + compute
     - [ ] PP
+        - [ ] 1F1B schedule
+        - [ ] Interleaved pipeline
     - [ ] Distributed Operators
+        - [ ] AllReduce / ReduceScatter / AllGather
+        - [ ] Ring vs tree algorithms
+    - [ ] 4.4 Tensor Parallel (TP)
+    - [ ] 4.5 Sequence Parallel (SP)
+    - [ ] 4.6 ZeRO and optimizer sharding
+    - [ ] 4.7 Checkpointing & recomputation
+    - [ ] 4.8 Mixed precision
+        - [ ] FP16/BF16
+        - [ ] FP8 training
+        - [ ] Dynamic loss scaling
+    - [ ] 4.9 Data pipeline
+        - [ ] Tokenization and packing
+        - [ ] Dataloader performance
+    - [ ] 4.10 Training stability
+        - [ ] Init strategies
+        - [ ] Gradient clipping
+        - [ ] LR schedules (cosine/warmup)
 - [ ] 5 Inference
     - [ ] 5.1 Quantization
+        - [ ] PTQ (INT8/INT4)
+        - [ ] AWQ / GPTQ
+        - [ ] KV cache quantization
     - [ ] 5.2 Speculative Decoding
+        - [ ] Draft-target setup
+        - [ ] Acceptance rate analysis
     - [ ] 5.3 vLLM
+    - [ ] 5.4 SGlang
+    - [ ] 5.5 PD split
+    - [ ] 5.6 Continuous batching
+    - [ ] 5.7 Prefix caching
+    - [ ] 5.8 CUDA Graph in serving
+    - [ ] 5.9 Scheduler design
+        - [ ] Throughput vs latency tradeoff
+        - [ ] Fairness and starvation
+    - [ ] 5.10 Serving stack
+        - [ ] Triton / TensorRT-LLM
+        - [ ] ONNX Runtime / OpenVINO
 - [ ] 6 RL
     - [ ] PPO
+        - [ ] Reward model training
+        - [ ] KL control
     - [ ] DPO
     - [ ] GRPO
+    - [ ] 6.4 RLAIF / Constitutional AI
+    - [ ] 6.5 Online vs offline alignment
+<!-- - [ ] 7 Tokenization & Data
+    - [ ] 7.1 BPE / Unigram tokenizers
+    - [ ] 7.2 Data cleaning and dedup
+    - [ ] 7.3 Dataset mixture and curriculum
+    - [ ] 7.4 Synthetic data generation -->
+
+<!-- - [ ] 9 Systems & Hardware
+    - [ ] 9.1 GPU architecture basics (SM, memory hierarchy)
+    - [ ] 9.2 NCCL communication internals
+    - [ ] 9.3 RDMA / InfiniBand basics
+    - [ ] 9.4 Storage and I/O bottlenecks
+- [ ] 10 Compiler & Runtime
+    - [ ] 10.1 CUDA programming model
+    - [ ] 10.2 Triton language
+    - [ ] 10.3 Graph compilation (XLA, TorchInductor)
+    - [ ] 10.4 Operator autotuning
+- [ ] 11 Deployment & Production
+    - [ ] 11.1 Multi-tenant serving
+    - [ ] 11.2 Autoscaling
+    - [ ] 11.3 Canary and rollback
+    - [ ] 11.4 Monitoring and alerting -->
