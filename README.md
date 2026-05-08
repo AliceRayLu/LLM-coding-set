@@ -65,19 +65,21 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
         - [ ] Sliding window + global tokens
         - [ ] Chunked attention
 - [ ] 4 Train
+    - [ ] Distributed Operators
+        - [ ] AllReduce / ReduceScatter / AllGather
+        - [ ] Ring vs tree algorithms
     - [ ] DP
         - [ ] Gradient accumulation
         - [ ] Overlap comm + compute
     - [ ] PP
         - [ ] 1F1B schedule
         - [ ] Interleaved pipeline
-    - [ ] Distributed Operators
-        - [ ] AllReduce / ReduceScatter / AllGather
-        - [ ] Ring vs tree algorithms
     - [ ] 4.4 Tensor Parallel (TP)
     - [ ] 4.5 Sequence Parallel (SP)
     - [ ] 4.6 ZeRO and optimizer sharding
-    - [ ] 4.7 Checkpointing & recomputation
+    - [ ] 4.7 Traning Framworks
+        - [ ] Megatron-LM
+
     - [ ] 4.8 Mixed precision
         - [ ] FP16/BF16
         - [ ] FP8 training
@@ -97,8 +99,9 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
     - [ ] 5.2 Speculative Decoding
         - [ ] Draft-target setup
         - [ ] Acceptance rate analysis
-    - [ ] 5.3 vLLM
-    - [ ] 5.4 SGlang
+    - [ ] 5.3 Inference Frameworks
+        - [ ] 5.3.1 vLLM
+        - [ ] 5.3.2 SGlang
     - [ ] 5.5 PD split
     - [ ] 5.6 Continuous batching
     - [ ] 5.7 Prefix caching
