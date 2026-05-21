@@ -29,7 +29,7 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
         - [ ] Broadcast patterns
         - [ ] Kernel fusion
 - [ ] 2 Attention
-    - [ ] 2.1 FlashAttention
+    - [ ] 2.1 hardware 
         - [ ] FlashAttention v1
         - [ ] FlashAttention v2
         - [ ] Variable-length sequences
@@ -38,22 +38,20 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
         - [ ] GQA
         - [ ] MLA
     - [ ] 2.3 Sparse Attention
-        - [ ] Block sparse attention
         - [ ] Sliding window attention
+        - [ ] Block sparse attention
+        - [ ] NSA
         - [ ] DSA
     - [ ] 2.4 Linear Attention
         - [ ] Kernelized attention
         - [ ] State-space alternatives
     - [ ] 2.5 Cross Attention
-- [ ] 3 Transformer Architecture
+- [ ] 3 Transformer
     - [ ] 3.1 Position Encoding
         - [ ] Sinusoidal
         - [ ] RoPE
         - [ ] ALiBi
     - [ ] 3.2 KV cache
-        - [ ] Cache layout and paging
-        - [ ] Prefix cache reuse
-        - [ ] Cache quantization
     - [ ] 3.3 MoE
         - [ ] Top-k routing
         - [ ] Load balancing loss
@@ -79,7 +77,6 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
     - [ ] 4.6 ZeRO and optimizer sharding
     - [ ] 4.7 Traning Framworks
         - [ ] Megatron-LM
-
     - [ ] 4.8 Mixed precision
         - [ ] FP16/BF16
         - [ ] FP8 training
