@@ -5,6 +5,7 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
 **[Contents]**
 
 - [ ] 1 Operators
+    - [ ] 1.0 GPU & Profile
     - [ ] 1.1 GEMM
         - [ ] Naive GEMM (CPU)
         - [ ] Tiled GEMM (shared memory)
@@ -28,8 +29,9 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
     - [ ] 1.6 Elementwise/Fused Operators
         - [ ] Broadcast patterns
         - [ ] Kernel fusion
+    - [ ] 1.7 Domain Specific Language(DSL)
 - [ ] 2 Attention
-    - [ ] 2.1 hardware 
+    - [ ] 2.1 Hardware Optimization
         - [ ] FlashAttention v1
         - [ ] FlashAttention v2
         - [ ] Variable-length sequences
@@ -40,7 +42,7 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
     - [ ] 2.3 Sparse Attention
         - [ ] Sliding window attention
         - [ ] Block sparse attention
-        - [ ] NSA
+        - [x] NSA
         - [ ] DSA
     - [ ] 2.4 Linear Attention
         - [ ] Kernelized attention
@@ -63,6 +65,7 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
         - [ ] Sliding window + global tokens
         - [ ] Chunked attention
 - [ ] 4 Train
+    - [ ] Training Profiler 
     - [ ] Distributed Operators
         - [ ] AllReduce / ReduceScatter / AllGather
         - [ ] Ring vs tree algorithms
@@ -89,6 +92,7 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
         - [ ] Gradient clipping
         - [ ] LR schedules (cosine/warmup)
 - [ ] 5 Inference
+    - [ ] 5.0 Inference Profiler
     - [ ] 5.1 Quantization
         - [ ] PTQ (INT8/INT4)
         - [ ] AWQ / GPTQ
@@ -96,9 +100,12 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
     - [ ] 5.2 Speculative Decoding
         - [ ] Draft-target setup
         - [ ] Acceptance rate analysis
+        - [ ] Eagle
     - [ ] 5.3 Inference Frameworks
         - [ ] 5.3.1 vLLM
         - [ ] 5.3.2 SGlang
+            - [ ] RadixAttention
+            - [ ] DP-Attention
     - [ ] 5.5 PD split
     - [ ] 5.6 Continuous batching
     - [ ] 5.7 Prefix caching
