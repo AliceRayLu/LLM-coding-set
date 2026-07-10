@@ -16,11 +16,11 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
         - [ ] LayerNorm
         - [ ] RMSNorm
         - [ ] Fused Add + Norm
-    - [ ] 1.3 activation
+    - [ ] 1.3 Activation
         - [ ] GeLU
         - [ ] SwiGLU / GeGLU
         - [ ] Fused bias + activation
-    - [ ] 1.4 softmax
+    - [ ] 1.4 Softmax
         - [ ] safe softmax
         - [ ] Online softmax
     - [ ] 1.5 Reduction & Scan
@@ -36,8 +36,8 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
         - [ ] FlashAttention v2
         - [ ] Variable-length sequences
     - [ ] 2.2 Compact Attention
-        - [ ] MQA
-        - [ ] GQA
+        - [x] MQA
+        - [x] GQA
         - [ ] MLA
     - [ ] 2.3 Sparse Attention
         - [ ] Sliding window attention
@@ -51,8 +51,9 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
 - [ ] 3 Transformer
     - [ ] 3.1 Position Encoding
         - [ ] Sinusoidal
-        - [ ] RoPE
         - [ ] ALiBi
+        - [ ] RoPE
+        - [ ] RoPE Scaling
     - [ ] 3.2 KV cache
     - [ ] 3.3 MoE
         - [ ] Top-k routing
