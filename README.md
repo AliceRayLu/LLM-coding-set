@@ -35,10 +35,10 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
         - [ ] FlashAttention v1
         - [ ] FlashAttention v2
         - [ ] Variable-length sequences
-    - [ ] 2.2 Compact Attention
+    - [x] 2.2 Compact Attention
         - [x] MQA
         - [x] GQA
-        - [ ] MLA
+        - [x] MLA
     - [ ] 2.3 Sparse Attention
         - [ ] Sliding window attention
         - [ ] Block sparse attention
@@ -47,22 +47,18 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
     - [ ] 2.4 Linear Attention
         - [ ] Kernelized attention
         - [ ] State-space alternatives
-    - [ ] 2.5 Cross Attention
+    - [ ] 2.5 KV cache
 - [ ] 3 Transformer
-    - [ ] 3.1 Position Encoding
+    - [ ] 3.1 Position Embedding
         - [ ] Sinusoidal
         - [ ] ALiBi
         - [ ] RoPE
         - [ ] RoPE Scaling
-    - [ ] 3.2 KV cache
-    - [ ] 3.3 MoE
+    - [ ] 3.2 MoE
         - [ ] Top-k routing
         - [ ] Load balancing loss
         - [ ] Expert parallelism
-    - [ ] 3.4 FFN variants
-        - [ ] Dense FFN
-        - [ ] SwiGLU FFN
-    - [ ] 3.5 Long-context architecture tricks
+    - [ ] 3.3 Long-context architecture tricks
         - [ ] Sliding window + global tokens
         - [ ] Chunked attention
 - [ ] 4 Train
@@ -101,7 +97,7 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
     - [ ] 5.2 Speculative Decoding
         - [ ] Draft-target setup
         - [ ] Acceptance rate analysis
-        - [ ] Eagle
+        - [ ] EAGLE
     - [ ] 5.3 Inference Frameworks
         - [ ] 5.3.1 vLLM
         - [ ] 5.3.2 SGlang
@@ -110,7 +106,7 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
     - [ ] 5.5 PD split
     - [ ] 5.6 Continuous batching
     - [ ] 5.7 Prefix caching
-    - [ ] 5.8 CUDA Graph in serving
+    - [ ] 5.8 CUDA Graph
     - [ ] 5.9 Scheduler design
         - [ ] Throughput vs latency tradeoff
         - [ ] Fairness and starvation
@@ -125,6 +121,9 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
     - [ ] GRPO
     - [ ] 6.4 RLAIF / Constitutional AI
     - [ ] 6.5 Online vs offline alignment
+- [ ] 7 Diffussion
+    - [ ] Cross Attention
+
 <!-- - [ ] 7 Tokenization & Data
     - [ ] 7.1 BPE / Unigram tokenizers
     - [ ] 7.2 Data cleaning and dedup
