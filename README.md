@@ -2,6 +2,11 @@
 
 All the AI-Infra-related codings and explanations from bottom up to the top.
 
+> **Before Start:**
+> 
+> This repo does not help you *learn from scratch*. It's better to learn some basics of LLM first and 
+> use this repo as *an interview coding reference book*.
+
 **[Contents]**
 
 - [ ] 1 Operators
@@ -32,8 +37,7 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
     - [ ] 1.7 Domain Specific Language(DSL)
 - [ ] 2 Attention
     - [ ] 2.1 Hardware Optimization
-        - [ ] FlashAttention v1
-        - [ ] FlashAttention v2
+        - [ ] FlashAttention 
         - [ ] Variable-length sequences
     - [x] 2.2 Compact Attention
         - [x] MQA
@@ -49,7 +53,7 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
         - [ ] State-space alternatives
     - [ ] 2.5 KV cache
 - [ ] 3 Transformer
-    - [ ] 3.1 Position Embedding
+    - [ ] 3.1 Positional Encoding
         - [ ] Sinusoidal
         - [ ] ALiBi
         - [ ] RoPE
@@ -62,18 +66,20 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
         - [ ] Sliding window + global tokens
         - [ ] Chunked attention
 - [ ] 4 Train
-    - [ ] Training Profiler 
+    - [ ] Training Process & Profilers 
     - [ ] Distributed Operators
         - [ ] AllReduce / ReduceScatter / AllGather
         - [ ] Ring vs tree algorithms
-    - [ ] DP
-        - [ ] Gradient accumulation
-        - [ ] Overlap comm + compute
-    - [ ] PP
-        - [ ] 1F1B schedule
-        - [ ] Interleaved pipeline
-    - [ ] 4.4 Tensor Parallel (TP)
-    - [ ] 4.5 Sequence Parallel (SP)
+    - [ ] Parallism
+        - [ ] Data Parallel (DP)
+            - [ ] Gradient accumulation
+            - [ ] Overlap comm + compute
+        - [ ] Pipeline Parallel (PP)
+            - [ ] 1F1B schedule
+            - [ ] Interleaved pipeline
+        - [ ] Tensor Parallel (TP)
+        - [ ] Sequence Parallel (SP)
+        - [ ] Expert Parallel (EP)
     - [ ] 4.6 ZeRO and optimizer sharding
     - [ ] 4.7 Traning Framworks
         - [ ] Megatron-LM
@@ -104,7 +110,9 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
             - [ ] RadixAttention
             - [ ] DP-Attention
     - [ ] 5.5 PD split
-    - [ ] 5.6 Continuous batching
+    - [ ] 5.6 Batching
+        - [ ] Continuous batching
+        - [ ] chunked prefill
     - [ ] 5.7 Prefix caching
     - [ ] 5.8 CUDA Graph
     - [ ] 5.9 Scheduler design
