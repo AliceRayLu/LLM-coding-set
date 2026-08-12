@@ -36,9 +36,7 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
         - [ ] Kernel fusion
     - [ ] 1.7 Domain Specific Language(DSL)
 - [ ] 2 Attention
-    - [ ] 2.1 Hardware Optimization
-        - [ ] FlashAttention 
-        - [ ] Variable-length sequences
+    - [ ] 2.1 FlashAttention
     - [x] 2.2 Compact Attention
         - [x] MQA
         - [x] GQA
