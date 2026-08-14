@@ -1,0 +1,155 @@
+"""Visualization: GFLOPS comparison and roofline plots."""
+
+from collections import defaultdict
+from typing import List, Optional, Tuple
+
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import numpy as np
+
+from .registry import SweepResult
+
+_COLORS = ["#2196F3", "#FF5722", "#4CAF50", "#FFC107", "#9C27B0",
+           "#00BCD4", "#E91E63", "#3F51B5", "#795548", "#607D8B"]
+_MARKERS = ["o", "s", "D", "^", "v", "<", ">", "p", "h", "*"]
+
+
+def plot_gemm_comparison(sweep: SweepResult,
+                         title: str = "GEMM Performance Comparison",
+                         figsize: Optional[Tuple[int, int]] = None,
+                         log_y: bool = False,
+                         gpu_baseline: str = "cuBLAS",
+                         cpu_baseline: str = "NumPy BLAS") -> plt.Figure:
+    """Plot GFLOPS vs matrix size — one row per backend (GPU / CPU).
+
+    Left panel: GFLOPS. Right panel: speedup vs the backend's baseline.
+    """
+    backends: List[str] = []
+    for r in sweep.results:
+        if r.backend not in backends:
+            backends.append(r.backend)
+
+    fig, axes = plt.subplots(len(backends), 2,
+                             figsize=figsize or (14, 6 * len(backends)),
+                             squeeze=False)
+
+    for row, backend in enumerate(backends):
+        ax_gf, ax_sp = axes[row]
+
+        names: List[str] = []
+        for r in sweep.results:
+            if r.backend == backend and r.name not in names:
+                names.append(r.name)
+        grouped = {n: [r for r in sweep.results if r.name == n and r.backend == backend]
+                   for n in names}
+
+        baseline = gpu_baseline if backend == "gpu" else cpu_baseline
+        if baseline not in grouped:
+            baseline = names[0]
+        baseline_gf = {r.M: r.gflops for r in grouped[baseline]}
+
+        # --- Left: GFLOPS vs size ---
+        for idx, name in enumerate(names):
+            color, marker = _COLORS[idx % 10], _MARKERS[idx % 10]
+            sizes = [r.M for r in grouped[name]]
+            gflops = [r.gflops for r in grouped[name]]
+            ax_gf.plot(sizes, gflops, color=color, marker=marker, linewidth=2,
+                       markersize=8, label=name, zorder=3)
+            for s, g in zip(sizes, gflops):
+                ax_gf.annotate(f"{g:.0f}", (s, g), textcoords="offset points",
+                               xytext=(0, 10), fontsize=8, ha="center", color=color)
+
+        ax_gf.set_xlabel("Matrix Size (M = N = K)", fontsize=11)
+        ax_gf.set_ylabel("GFLOPS", fontsize=11)
+        ax_gf.set_title(f"{backend.upper()} — {title}", fontsize=13)
+        ax_gf.legend(fontsize=9, loc="upper left")
+        ax_gf.grid(True, alpha=0.3, linestyle="--")
+        if log_y:
+            ax_gf.set_yscale("log", base=2)
+        ax_gf.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f"{x:.0f}"))
+
+        # --- Right: speedup vs baseline ---
+        all_speedups: List[float] = []
+        for idx, name in enumerate(names):
+            if name == baseline:
+                continue
+            color, marker = _COLORS[idx % 10], _MARKERS[idx % 10]
+            sizes, speedups = [], []
+            for r in grouped[name]:
+                b = baseline_gf.get(r.M)
+                if b:
+                    sizes.append(r.M)
+                    speedups.append(r.gflops / b)
+            all_speedups.extend(speedups)
+            ax_sp.plot(sizes, speedups, color=color, marker=marker, linewidth=2,
+                       markersize=8, label=name, zorder=3)
+            for s, sp in zip(sizes, speedups):
+                lbl = f"{sp:.3f}x" if sp < 0.1 else f"{sp:.2f}x"
+                ax_sp.annotate(lbl, (s, sp), textcoords="offset points",
+                               xytext=(0, 10), fontsize=8, ha="center", color=color)
+
+        ax_sp.axhline(1.0, color="gray", linestyle="--", linewidth=1,
+                      alpha=0.7, label=f"Baseline ({baseline})")
+        ax_sp.set_xlabel("Matrix Size (M = N = K)", fontsize=11)
+        ax_sp.set_ylabel(f"Speedup vs {baseline}", fontsize=11)
+        ax_sp.set_title(f"Speedup vs {baseline} ({backend.upper()})", fontsize=13)
+        ax_sp.legend(fontsize=9)
+        ax_sp.grid(True, alpha=0.3, linestyle="--")
+        if all_speedups and min(all_speedups) < 0.05:
+            ax_sp.set_yscale("log", base=2)
+
+    plt.tight_layout()
+    return fig
+
+
+def plot_roofline(sweep: SweepResult,
+                  peak_fp32_tflops: float = 19.5,
+                  memory_bw_gbs: float = 2039.0) -> plt.Figure:
+    """Plot a simple roofline model with measured data points (GPU only)."""
+    gpu_results = [r for r in sweep.results if r.backend == "gpu"]
+    if not gpu_results:
+        raise ValueError("No GPU results in sweep — the roofline is GPU-specific.")
+
+    fig, ax = plt.subplots(figsize=(10, 7))
+
+    # Roofline curves
+    oi = np.logspace(-1, 4, 100)  # FLOP/Byte
+    roofline = np.minimum(np.full_like(oi, peak_fp32_tflops * 1000),
+                          memory_bw_gbs * oi)
+    ax.loglog(oi, roofline, "k-", linewidth=2, label="Roofline", zorder=2)
+    ax.fill_between(oi, roofline, alpha=0.05, color="black")
+
+    ridge = peak_fp32_tflops * 1000 / memory_bw_gbs
+    ax.axvline(ridge, color="gray", linestyle=":", alpha=0.5)
+    ax.annotate(f"Ridge: {ridge:.1f} FLOP/Byte",
+                xy=(ridge, peak_fp32_tflops * 1000),
+                xytext=(ridge * 1.3, peak_fp32_tflops * 800),
+                fontsize=9, arrowprops=dict(arrowstyle="->", alpha=0.5))
+
+    # Measured points
+    grouped = defaultdict(list)
+    for r in gpu_results:
+        grouped[r.name].append(r)
+
+    for idx, (name, results) in enumerate(grouped.items()):
+        color, marker = _COLORS[idx % 10], _MARKERS[idx % 10]
+        for r in results:
+            # Operational intensity = FLOPs / bytes read (inputs only)
+            bytes_read = (r.M * r.K + r.K * r.N) * 4
+            intensity = (2.0 * r.M * r.N * r.K) / bytes_read
+            ax.scatter([intensity], [r.gflops], color=color, marker=marker,
+                       s=100, zorder=4, edgecolors="white", linewidth=0.5)
+            ax.annotate(f"{r.M}", (intensity, r.gflops),
+                        textcoords="offset points", xytext=(8, 0),
+                        fontsize=7, color=color)
+        ax.scatter([], [], color=color, marker=marker, s=80, label=name)
+
+    ax.set_xlabel("Operational Intensity (FLOP / Byte)", fontsize=12)
+    ax.set_ylabel("GFLOPS", fontsize=12)
+    ax.set_title(f"Roofline Model (Peak: {peak_fp32_tflops} TFLOPS, "
+                 f"BW: {memory_bw_gbs} GB/s)", fontsize=14)
+    ax.legend(fontsize=10)
+    ax.grid(True, alpha=0.3, linestyle="--")
+
+    plt.tight_layout()
+    return fig
