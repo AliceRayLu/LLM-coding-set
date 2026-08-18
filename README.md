@@ -12,8 +12,8 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
 - [ ] 1 Operators
     - [ ] 1.0 GPU & Profile
     - [ ] 1.1 GEMM
-        - [ ] Naive GEMM (CPU)
-        - [ ] Tiled GEMM (shared memory)
+        - [x] Naive GEMM (CPU)
+        - [x] Tiled GEMM (shared memory)
         - [ ] WMMA/Tensor Core GEMM
         - [ ] Grouped GEMM / Batched GEMM
         - [ ] Epilogue fusion (bias + activation)
