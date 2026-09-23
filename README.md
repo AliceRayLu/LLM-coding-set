@@ -25,7 +25,7 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
         - [ ] GeLU
         - [ ] SwiGLU / GeGLU
         - [ ] Fused bias + activation
-    - [ ] 1.4 Softmax
+    - [x] 1.4 Softmax
         - [ ] safe softmax
         - [ ] Online softmax
     - [ ] 1.5 Reduction & Scan
@@ -35,6 +35,8 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
         - [ ] Broadcast patterns
         - [ ] Kernel fusion
     - [ ] 1.7 Domain Specific Language(DSL)
+        - [ ] 1.7.1 triton
+        - [ ] 1.7.2 tilelang
 - [ ] 2 Attention
     - [ ] 2.1 FlashAttention
     - [x] 2.2 Compact Attention
@@ -64,7 +66,7 @@ All the AI-Infra-related codings and explanations from bottom up to the top.
         - [ ] Sliding window + global tokens
         - [ ] Chunked attention
 - [ ] 4 Train
-    - [ ] Training Process & Profilers 
+    - [ ] 4.1 Accountings & Profilers 
     - [ ] Distributed Operators
         - [ ] AllReduce / ReduceScatter / AllGather
         - [ ] Ring vs tree algorithms
